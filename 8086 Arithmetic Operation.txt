@@ -1,0 +1,137 @@
+----------------
+ADD 8080 PROGRAM:
+----------------
+
+                OUTPUT 2500AD
+.ORG 2000H
+DATA SEGMENT
+NUM1 DW AAAAH
+NUM2 DW BBBBH
+SUM DW 0000H
+CARRY DB 00H
+DATA ENDS
+CODE SEGMENT
+        ASSUME CS:CODE,DS:DATA
+        MOV AX,DATA
+        MOV DS,AX
+        MOV CL,00H
+        MOV AX,NUM1
+        MOV BX,NUM2
+        ADD AX,BX
+        JNC L1
+        INC CL
+L1:     MOV SUM,AX
+        MOV CARRY,CL
+CODE ENDS
+END
+
+
+---------------------
+SUBTRACT 8086 PROGRAM:
+---------------------
+                OUTPUT 2500AD
+.ORG 2000H
+DATA SEGMENT
+NUM1 DW AAAAH
+NUM2 DW BBBBH
+DIFF DW 0000H
+BR DB 00H
+DATA ENDS
+CODE SEGMENT
+                ASSUME CS:CODE,DS:DATA
+                MOV AX,DATA
+                MOV DS,AX
+                MOV CL,00H
+                MOV AX,NUM1
+                SUB AX,NUM2
+                JNC L1
+                INC CL
+L1:             MOV DIFF,AX
+                MOV BR,CL
+CODE ENDS
+END
+
+
+---------------------
+MULTIPLY 8086 PROGRAM:
+----------------------
+                OUTPUT 2500AD
+.ORG 2000H
+DATA SEGMENT
+NUM1 DW AAAAH
+NUM2 DW BBBBH
+MUL1 DW 0000H
+MUL2 DW 0000H
+DATA ENDS
+CODE SEGMENT
+                ASSUME CS:CODE,DS:DATA
+                MOV AX,DATA
+                MOV DS,AX
+                MOV AX,NUM1
+                MOV BX,NUM2
+                MUL BX
+                MOV MUL1,AX
+                MOV MUL2,DX
+CODE ENDS
+END
+
+
+-------------------
+DIVIDE 8086 PROGRAM:
+-------------------
+                OUTPUT 2500AD
+.ORG 2000H
+DATA SEGMENT
+NUM1 DW 0004H
+NUM2 DW 0002H
+QUO DW 0000H
+REM DW 0000H
+DATA ENDS
+CODE SEGMENT
+                ASSUME CS:CODE,DS:DATA
+                MOV AX,DATA
+                MOV DS,AX
+                MOV DX,0000H
+                MOV AX,NUM1
+                MOV BX,NUM2
+                DIV BX
+                MOV QUO,AX
+                MOV REM,DX
+CODE ENDS
+END
+
+
+------------------------
+EXPRESSION 8086 PROGRAM:
+------------------------
+                OUTPUT 2500AD
+.ORG 2000H
+DATA SEGMENT
+NUMA DW 05H
+NUMB DW 03H
+NUMA2 DW 0000H
+NUMB2 DW 0000H
+NUMAB DW 0000H
+RES DW 0000H
+DATA ENDS
+CODE SEGMENT
+                ASSUME CS:CODE,DS:DATA
+                MOV AX,DATA
+                MOV DS,AX
+                MOV AL,NUMA
+                MUL AL
+                MOV NUMA2,AX
+                MOV AL,NUMB
+                MUL AL
+                MOV NUMB2,AX
+                MOV AL,NUMA
+                MOV BL,NUMB
+                MUL BL
+                ADD AX,AX
+                MOV NUMAB,AX
+                MOV AX,NUMA2
+                SUB AX,NUMB2
+                SUB AX,NUMAB
+                MOV RES,AX
+CODE ENDS
+END
